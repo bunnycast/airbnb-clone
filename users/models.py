@@ -31,20 +31,14 @@ class User(AbstractUser):
     CURRENCY_CHOICES = ((CURRENCY_USD, "USD"), (CURRENCY_KRW, "KRW"))
 
     # Image field needs Pillow, null : db, blank : form
-    avatar = models.ImageField(null=True, blank=True)
+    avatar = models.ImageField(blank=True)
 
     # custom choices field > don't need migration
-    gender = models.CharField(
-        choices=GENDER_CHOICES, max_length=10, null=True, blank=True
-    )
-    birthdate = models.DateField(null=True)
-    language = models.CharField(
-        choices=LANGUAGE_CHOICES, max_length=2, null=True, blank=True
-    )
-    currency = models.CharField(
-        choices=CURRENCY_CHOICES, max_length=3, null=True, blank=True
-    )
+    gender = models.CharField(choices=GENDER_CHOICES, max_length=10, blank=True)
+    birthdate = models.DateField(null=True, blank=True)
+    language = models.CharField(choices=LANGUAGE_CHOICES, max_length=2, blank=True)
+    currency = models.CharField(choices=CURRENCY_CHOICES, max_length=3, blank=True)
 
-    bio = models.TextField(default="", blank=True)
+    bio = models.TextField(blank=True)
 
     is_superHost = models.BooleanField(default=False)
