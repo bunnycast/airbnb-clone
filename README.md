@@ -1,3 +1,3 @@
 # Airbnb Clone
 
-Cloning Airbnb with python, Django, Tailwind css ls
+Cloning Airbnb with python, Django, Tailwind css
