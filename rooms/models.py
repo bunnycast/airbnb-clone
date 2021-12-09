@@ -4,6 +4,23 @@ from django_countries.fields import CountryField
 from core import models as core_models
 
 
+class AbstractItem(core_models.TimeStampedModel):
+    """Abstract Item"""
+
+    name = models.CharField(max_length=80)
+
+    class Meta:
+        abstract = True
+
+    def __str__(self):
+        return self.name
+
+
+class RoomType(AbstractItem):
+
+    pass
+
+
 class Room(core_models.TimeStampedModel):
 
     """Room Model Definition"""
@@ -28,5 +45,12 @@ class Room(core_models.TimeStampedModel):
 
     instant_book = models.BooleanField(default=False)
 
-    # room > user ForeignKey
+    # room => user ForeignKey
     host = models.ForeignKey("users.User", on_delete=models.CASCADE)
+
+    # Room <=> RoomType MTM 연결
+    room_type = models.ManyToManyField(RoomType, blank=True)
+
+    # 객체를 전달할 때 표시되는 이림을 변경
+    def __str__(self):
+        return self.name
