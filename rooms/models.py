@@ -22,12 +22,19 @@ class RoomType(AbstractItem):
 
     pass
 
+    class Meta:
+        verbose_name = "Room Type"
+        ordering = ["name"]
+
 
 class Amenity(AbstractItem):
 
     """ Amenity Model Definition """
 
     pass
+
+    class Meta:
+        verbose_name_plural = "Amenities"
 
 
 class Facility(AbstractItem):
@@ -36,6 +43,9 @@ class Facility(AbstractItem):
 
     pass
 
+    class Meta:
+        verbose_name_plural = "Facilities"
+
 
 class HouseRule(AbstractItem):
 
@@ -43,10 +53,25 @@ class HouseRule(AbstractItem):
 
     pass
 
+    class Meta:
+        verbose_name = "House Rule"
+
+
+class Photo(core_models.TimeStampedModel):
+
+    """ Photo model Definition """
+
+    caption = models.CharField(max_length=80)
+    file = models.ImageField()
+    room = models.ForeignKey("rooms.Room", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.caption
+
 
 class Room(core_models.TimeStampedModel):
 
-    """Room Model Definition"""
+    """ Room Model Definition """
 
     name = models.CharField(max_length=140)
     description = models.TextField()
@@ -70,13 +95,13 @@ class Room(core_models.TimeStampedModel):
 
     # room => user ForeignKey N:1
     host = models.ForeignKey("users.User", on_delete=models.CASCADE)
-    room_type = models.ForeignKey(RoomType, on_delete=models.SET_NULL, null=True)
+    room_type = models.ForeignKey("rooms.RoomType", on_delete=models.SET_NULL, null=True)
 
     # Room <=> RoomItem 상속받은 모델 (Facility, Amenity, HouseRule) MTM 연결
-    facilities = models.ManyToManyField(Facility, blank=True)
-    amenities = models.ManyToManyField(Amenity, blank=True)
-    house_rules = models.ManyToManyField(HouseRule, blank=True)
+    facilities = models.ManyToManyField("rooms.Facility", blank=True)
+    amenities = models.ManyToManyField("rooms.Amenity", blank=True)
+    house_rules = models.ManyToManyField("rooms.HouseRule", blank=True)
 
-    # 객체를 전달할 때 표시되는 이림을 변경
+    # 객체를 전달할 때 표시되는 이름을 변경
     def __str__(self):
         return self.name
