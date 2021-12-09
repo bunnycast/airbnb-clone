@@ -10,7 +10,7 @@ class User(AbstractUser):
     GENDER_FEMALE = "female"
     GENDER_OTHER = "other"
 
-    # form 에서 보이는 필드명
+    # admin form 에서 보이는 필드명
     GENDER_CHOICES = (
         (GENDER_MALE, "Male"),
         (GENDER_FEMALE, "Female"),
