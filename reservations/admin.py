@@ -2,7 +2,7 @@ from django.contrib import admin
 from . import models
 
 
-@admin.register(models.Reservatino)
+@admin.register(models.Reservation)
 class ReservationAdmin(admin.ModelAdmin):
 
     """Reservation Admin Definition"""
