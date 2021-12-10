@@ -29,6 +29,9 @@ class RoomAdmin(admin.ModelAdmin):
         "check_in",
         "check_out",
         "instant_book",
+        "count_amenities",
+        # "facilities"
+        # "house_rules",
     )
 
     # admin > 목록 페이지에서 필터링 할 필드를 지정
@@ -61,6 +64,7 @@ class RoomAdmin(admin.ModelAdmin):
         (
             "More About the Space",
             {
+                # 메뉴 접기 기능
                 "classes": ("collapse",),
                 "fields": (
                     "amenities",
@@ -71,6 +75,13 @@ class RoomAdmin(admin.ModelAdmin):
         ),
         ("Last Details", {"fields": ("host",)}),
     )
+
+    # Using Admin Function
+    def count_amenities(self, obj):
+        print(obj.amenities)
+        return None
+
+    count_amenities.short_description = "super sexy"
 
 
 @admin.register(models.Photo)
