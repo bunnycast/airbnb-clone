@@ -78,10 +78,9 @@ class RoomAdmin(admin.ModelAdmin):
 
     # Using Admin Function
     def count_amenities(self, obj):
-        print(obj.amenities)
-        return None
+        return obj.amenities.count()
 
-    count_amenities.short_description = "super sexy"
+    count_amenities.short_description = "Amenities"
 
 
 @admin.register(models.Photo)
