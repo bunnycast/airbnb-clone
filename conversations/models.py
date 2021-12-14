@@ -6,13 +6,16 @@ class Conversation(core_models.TimeStampedModel):
 
     """Conversation Model Definition"""
 
-    participants = models.ManyToManyField("users.User", blank=True)
+    participants = models.ManyToManyField(
+        "users.User", related_name="conversation", blank=True
+    )
 
     def __str__(self):
         return str(self.created_at)
 
 
 class Message(core_models.TimeStampedModel):
+
     """Message Model Definition"""
 
     message = models.TextField()

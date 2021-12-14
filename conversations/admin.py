@@ -13,6 +13,7 @@ class MessageAdmin(admin.ModelAdmin):
 
 @admin.register(models.Conversation)
 class ConversationAdmin(admin.ModelAdmin):
+
     """Conversation Admin Definition"""
 
     pass
