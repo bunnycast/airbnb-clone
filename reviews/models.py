@@ -14,6 +14,7 @@ class Review(core_models.TimeStampedModel):
     check_in = models.IntegerField()
     value = models.IntegerField()
 
+    # foreignkey 로 다른 모델의 필드에 접근 가능
     user = models.ForeignKey(
         "users.User", related_name="review", on_delete=models.CASCADE
     )
@@ -24,4 +25,15 @@ class Review(core_models.TimeStampedModel):
     def __str__(self):
         return f"{self.review} - {self.room}"
 
-    # foreignkey 로 다른 모델의 필드에 접근 가능
+    def rating_average(self):
+        avg = (
+            self.accuracy
+            + self.communication
+            + self.cleanliness
+            + self.location
+            + self.check_in
+            + self.value
+        ) / 6
+        return round(avg, 2)
+
+    rating_average.short_description = "Avg⭐️"
