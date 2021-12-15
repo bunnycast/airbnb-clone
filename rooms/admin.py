@@ -36,7 +36,8 @@ class RoomAdmin(admin.ModelAdmin):
         "instant_book",
         "count_amenities",
         "count_photos",
-        # "facilities"
+        "total_rating",
+        # "facilities",
         # "house_rules",
     )
 

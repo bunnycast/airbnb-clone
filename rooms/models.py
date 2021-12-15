@@ -117,3 +117,12 @@ class Room(core_models.TimeStampedModel):
     # 객체를 전달할 때 표시되는 이름을 변경
     def __str__(self):
         return self.name
+
+    def total_rating(self):
+        all_reviews = self.review.all()
+        all_ratings = 0
+        for review in all_reviews:
+            all_ratings += review.rating_average()
+        return all_ratings / len(all_reviews)
+
+    total_rating.short_description = "Total Rating⭐️"
